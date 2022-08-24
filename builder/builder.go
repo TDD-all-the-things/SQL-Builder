@@ -64,7 +64,8 @@ func (t *InsertSQL) Fill(val reflect.Value) {
 
 		isEmbeddedField := val.Type().Field(i).Anonymous
 		isStruct := val.Field(i).Kind() == reflect.Struct
-		_, implementsInterface := val.Field(i).Interface().(driver.Valuer)
+		//_, implementsInterface := val.Field(i).Interface().(driver.Valuer)
+		implementsInterface := val.Field(i).Type().Implements(reflect.TypeOf((*driver.Valuer)(nil)).Elem())
 
 		if isEmbeddedField && isStruct && !implementsInterface {
 			t.Fill(val.Field(i))

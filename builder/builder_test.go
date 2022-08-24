@@ -146,7 +146,7 @@ func TestInsertStmt(t *testing.T) {
 	for _, tc := range testCases {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
-			//t.Parallel()
+			t.Parallel()
 			query, args, err := builder.InsertStmt(tc.entity)
 			assert.ErrorIs(t, err, tc.wantErr)
 			assert.Equal(t, tc.wantSQL, query)
